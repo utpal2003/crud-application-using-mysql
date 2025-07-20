@@ -14,12 +14,12 @@ const Addstudent = () => {
             return alert("Please fill all the fields");
         }
 
-        // axios.post('http://localhost:8000/addstudent', { name, email })
-        //     .then(res => {
-        //         console.log(res)
-        //         navigate('/');
-        //     })
-        //     .catch(err => console.log(err))
+        axios.post('http://localhost:8000/addstudent', { name, email })
+            .then(res => {
+                console.log(res)
+                navigate('/');
+            })
+            .catch(err => console.log(err))
         console.log(name, email)
         setemail('')
         setname('')
