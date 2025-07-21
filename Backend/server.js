@@ -29,12 +29,39 @@ app.post('/addstudent', (req, res) => {
         req.body.name,
         req.body.email
     ]
-    db.query(sql, [Values], (err, res) => {
+    db.query(sql, [Values], (err, data) => {
         if (err) return res.json({ error: err });
-        return res.json(res)
+        return res.json(data)
+
     })
 
 })
+
+
+app.put('/update/:id', (req, res) => {
+    const sql = 'update student set `Name` = ?,`Email` = ? where ID = ?';
+    const id = req.params.id;
+    const values = [
+        req.body.name,
+        req.body.email
+    ]
+    db.query(sql, [...values, id], (err, data) => {
+        if (err) return res.json({ error: err });
+        return res.json(data)
+
+    })
+
+})
+app.delete('/delete/:id', (req, res) => {
+    const sql = 'delete from student where ID = ?';
+    const id = req.params.id;
+
+    db.query(sql, [id], (err, data) => {
+        if (err) return res.json({ error: err });
+        return res.json({ message: "Student deleted successfully!" })
+
+    })
+});
 
 app.listen(8000, () => {
     console.log("port is listening on port 8000")
